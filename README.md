@@ -7,3 +7,5 @@ Developers:
 - Brandon Ruiz
 - Kiengchay Gomez
 - Joshua Hahn
+
+https://trello.com/invite/b/WkbBEASY/ATTI35e1ccfcbc98083454b47bda3de3ddfa79AEA8B7/project-management-board
