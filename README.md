@@ -3,7 +3,7 @@
 This is a calendar based app with multiple organizational features to aid in planning your daily life.
 
 Developers:
-- Jaye 
-- Brandon
-- Keingchay
-- Joshua
+- Jaye Rhinehart
+- Brandon Ruiz
+- Kiengchay Gomez
+- Joshua Hahn
