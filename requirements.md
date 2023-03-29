@@ -41,3 +41,5 @@ Our stretch goals are to have a login button, multiple months in our calendar, e
 ### What stretch goals are you going to aim for?
 
 All of them that are listed above if we have time.
+![FimaLabProject](https://user-images.githubusercontent.com/78291880/228427349-c702ccc9-2fdd-441a-85b6-ae2a1a4cd3a8.png)
+
