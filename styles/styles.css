@@ -1,0 +1,31 @@
+body {
+  background-color: azure;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px red solid;
+}
+
+h1 {
+  font-size: 35px;
+  padding: 10px;
+}
+
+ul {
+  display: flex;
+  justify-content: right;
+  font-size: 25px;
+  padding: 10px;
+}
+
+ul>li {
+  padding: 10px;
+}
+
+aside {
+border: 1px red solid;
+}
+
