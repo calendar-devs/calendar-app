@@ -8,6 +8,9 @@ const year = 23;
 // DOM WINDOW
 let toDoList = document.getElementById('to-do-list');
 let calendar = document.getElementById('calendar');
+let modal = document.getElementById('modal');
+let closeButton = document.getElementById('close-button');
+let form = document.getElementById('form');
 
 // Month contructor
 function Month(nameOfMonth, numberOfDays, keyValue, index) {
@@ -106,13 +109,18 @@ function getNumWeeks(month, firstDay) {
 }
 
 function handleDateClick(e){
-  
+  modal.style.display = 'block';
+}
+
+function handleCloseClick(e){
+  modal.style.display = 'none';
 }
 
 for (let i = 0; i < months.length; i++) {
   months[i].render();
 }
 
+closeButton.addEventListener('click', handleCloseClick);
 
 
 
