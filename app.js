@@ -68,7 +68,7 @@ let mar = new Month('March', 31, 4, 2);
 function getNumWeeks(month, firstDay) {
   let dayThreshold = [5, 1, 5, 6, 5, 6, 5, 5, 6, 5, 6, 5];
   //   let firstDay = new Date(year, month, 1).getDay();
-  let baseWeeks = (month == 1 ? 4 : 5); // only February can fit in 4 weeks
+  let baseWeeks = (month === 1 ? 4 : 5); // only February can fit in 4 weeks
   // TODO: account for leap years
   return baseWeeks + (firstDay >= dayThreshold[month] ? 1 : 0); // add an extra week if the month starts beyond the threshold day.
 }

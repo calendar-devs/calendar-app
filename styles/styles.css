@@ -14,14 +14,14 @@ h1 {
   padding: 10px;
 }
 
-ul {
+ol {
   display: flex;
   justify-content: right;
   font-size: 25px;
   padding: 10px;
 }
 
-ul>li {
+ol>li {
   padding: 10px;
 }
 

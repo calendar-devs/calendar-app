@@ -8,34 +8,45 @@
   <link rel='stylesheet' href='./styles/reset.css'>
   <link rel='stylesheet' href='./styles/styles.css'>
   <title>calendar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/to-do.css">
 </head>
 
 <body>
   <header>
     <h1>Calendar Site</h1>
     <nav>
-      <ul>
+      <ol>
         <li>Home</li>
         <li>About</li>
         <li>Login</li>
-      </ul>
+      </ol>
     </nav>
 
   </header>
 
 
-  <aside id='to-do-list' class='to-do-list'>
-  <p>to-do list</p>
-
-  </aside>
-
+<div class="side-bar">
   <section id='calendar' class='calendar' >
   </section>
-
-
+  <aside>
+    <div class="container">
+      <div class="app">
+        <h2>TO DO LIST</h2>
+        
+        <form>
+          <input type="text" placeholder="Add new task...">
+          <button type="submit">&plus;</button>
+        </form>
+        <ul></ul>
+      </div>
+    </div>
+  </aside>
+</div>
   <footer>
 
   </footer>
+  <script src='list.js'></script>
   <script src='app.js'></script>
 </body>
 
