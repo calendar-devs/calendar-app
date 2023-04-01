@@ -37,33 +37,37 @@ function handleAddEvent(event) {
 
 function displayEventsToModal(td) {
   // If the td (day) has an event added to it, append event to the calendar
+  let day;
   if (localStorage.getItem(td.id)) {
-
-    // clear all events in the td (day) first so that events don't show doubles on the calendar
-    // when displaying.
-    // let allEventsInDay = document.querySelectorAll(`#${td.id} .added-events`);
-    // for (let i = 0; i < allEventsInDay.length; i++) {
-    //   allEventsInDay[i].remove();
-    // }
-    let allEventsInDay = document.getElementById('events-container');
-    allEventsInDay.innerHTML = '';
-
-    let day = new Day(JSON.parse(localStorage.getItem(td.id)));
-    for (let i = 0; i < day.eventsOfDay.length; i++) {
-      let newEventDiv = document.createElement('div');
-      newEventDiv.classList.add('added-events');
-      
-      let eventTimeDispay = document.createElement('p');
-      let eventTitleDisplay = document.createElement('p');
-      eventTimeDispay.textContent = day.eventsOfDay[i].time;
-      eventTitleDisplay.textContent = day.eventsOfDay[i].title;
-
-      newEventDiv.appendChild(eventTimeDispay);
-      newEventDiv.appendChild(eventTitleDisplay);
-      // td.appendChild(newEventDiv);
-      allEventsInDay.appendChild(newEventDiv);
-    }
+    day = new Day(JSON.parse(localStorage.getItem(td.id)));
+  } else {
+    day = new Day([]);
   }
+  // clear all events in the td (day) first so that events don't show doubles on the calendar
+  // when displaying.
+  // let allEventsInDay = document.querySelectorAll(`#${td.id} .added-events`);
+  // for (let i = 0; i < allEventsInDay.length; i++) {
+  //   allEventsInDay[i].remove();
+  // }
+  let allEventsInDay = document.getElementById('events-container');
+  allEventsInDay.innerHTML = '';
+
+  // let day = new Day(JSON.parse(localStorage.getItem(td.id)));
+  for (let i = 0; i < day.eventsOfDay.length; i++) {
+    let newEventDiv = document.createElement('div');
+    newEventDiv.classList.add('added-events');
+
+    let eventTimeDispay = document.createElement('p');
+    let eventTitleDisplay = document.createElement('p');
+    eventTimeDispay.textContent = day.eventsOfDay[i].time;
+    eventTitleDisplay.textContent = day.eventsOfDay[i].title;
+
+    newEventDiv.appendChild(eventTimeDispay);
+    newEventDiv.appendChild(eventTitleDisplay);
+    // td.appendChild(newEventDiv);
+    allEventsInDay.appendChild(newEventDiv);
+  }
+  // }
 }
 
 populateTimes();

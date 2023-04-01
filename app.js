@@ -148,7 +148,7 @@ function handleCloseClick(e) {
 
 // Displays all events from localStorage to the calendar
 function displayEventsToCalendar(td) {
-  // If the td (day) has an event added to it, append event to the calendar
+  // If the td (day) has an event added to it in local storage, append event to the calendar
   if (localStorage.getItem(td.id)) {
 
     // clear all events in the td (day) first so that events don't show doubles on the calendar
