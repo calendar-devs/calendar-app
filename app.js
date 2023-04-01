@@ -11,7 +11,7 @@ let calendar = document.getElementById('calendar');
 let modal = document.getElementById('modal');
 let closeButton = document.getElementById('close-button');
 let selectedDay = null;
-// let addEventForm = document.getElementById('add-event-form');
+let addEventForm = document.getElementById('add-event-form');
 
 // Month contructor
 function Month(nameOfMonth, numberOfDays, keyValue, index) {
@@ -58,15 +58,16 @@ Month.prototype.render = function () {
       // Loops through the days of the week
       for (let j = 0; j < daysOfWeek.length; j++) {
         let td = document.createElement('td');
-        
+
         if (j >= this.startDay) {
           if (counter > this.numberOfDays) {
             td.textContent = ' ';
             console.log('week loop');
           } else {
-            td.addEventListener('click', handleDateClick);
             td.id = `${this.nameOfMonth}${counter}`;
             td.textContent = counter++;
+            displayEventsToCalendar(td);
+            td.addEventListener('click', handleDateClick);
           }
         }
         tr.appendChild(td);
@@ -80,9 +81,10 @@ Month.prototype.render = function () {
         if (counter > this.numberOfDays) {
           td.textContent = ' ';
         } else {
-          td.addEventListener('click', handleDateClick);
           td.id = `${this.nameOfMonth}${counter}`;
           td.textContent = counter++;
+          displayEventsToCalendar(td);
+          td.addEventListener('click', handleDateClick);
         }
 
       }
@@ -101,12 +103,12 @@ function Day(eventsOfDay) {
   this.eventsOfDay = eventsOfDay;
 }
 
-Day.prototype.addEvent = function(time, title) {
+Day.prototype.addEvent = function (time, title) {
   let newEvent = new DayEvent(time, title);
   this.eventsOfDay.push(newEvent);
 };
 
-Day.prototype.saveToLocalStorage = function(date) {
+Day.prototype.saveToLocalStorage = function (date) {
   localStorage.setItem(date, JSON.stringify(this.eventsOfDay));
 };
 
@@ -130,14 +132,46 @@ function getNumWeeks(month, firstDay) {
   return baseWeeks + (firstDay >= dayThreshold[month] ? 1 : 0); // add an extra week if the month starts beyond the threshold day.
 }
 
-function handleDateClick(e){
+function handleDateClick(e) {
   modal.style.display = 'block';
-  selectedDay = e.target;
-  // console.log(e.target.id);
+  selectedDay = this; // grabs the td that the user clicked on
+  // selectedDay = e.target;
+  console.log(selectedDay);
+  displayEventsToModal(selectedDay);
+  addEventForm.reset(); // clears the form for next event
 }
 
-function handleCloseClick(e){
+// Closes the modal when you press the 'close' button
+function handleCloseClick(e) {
   modal.style.display = 'none';
+}
+
+// Displays all events from localStorage to the calendar
+function displayEventsToCalendar(td) {
+  // If the td (day) has an event added to it, append event to the calendar
+  if (localStorage.getItem(td.id)) {
+
+    // clear all events in the td (day) first so that events don't show doubles on the calendar
+    // when displaying.
+    let allEventsInDay = document.querySelectorAll(`#${td.id} .added-events`);
+    for (let i = 0; i < allEventsInDay.length; i++) {
+      allEventsInDay[i].remove();
+    }
+
+    let day = new Day(JSON.parse(localStorage.getItem(td.id)));
+    for (let i = 0; i < day.eventsOfDay.length; i++) {
+      let newEventDiv = document.createElement('div');
+      newEventDiv.classList.add('added-events');
+      let eventTimeDispay = document.createElement('p');
+      let eventTitleDisplay = document.createElement('p');
+      eventTimeDispay.textContent = day.eventsOfDay[i].time;
+      eventTitleDisplay.textContent = day.eventsOfDay[i].title;
+
+      newEventDiv.appendChild(eventTimeDispay);
+      newEventDiv.appendChild(eventTitleDisplay);
+      td.appendChild(newEventDiv);
+    }
+  }
 }
 
 for (let i = 0; i < months.length; i++) {

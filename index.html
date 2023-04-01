@@ -31,12 +31,12 @@
     <div id="modal" class="modal">
       <div class="modal-content">
         <span id="close-button" class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <div id="events-container"></div>
         <form id="add-event-form">
           <fieldset>
             <legend>Add new event</legend>
             <label for="event-title">Event title</label>
-            <input type="text" name="eventTitle" id="event-title">
+            <input type="text" name="eventTitle" id="event-title" maxLength="10">
             <label for="event-time">Event time</label>
             <select id="times"></select>
             <input type="submit" value="Add event">
