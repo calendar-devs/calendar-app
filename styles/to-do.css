@@ -9,19 +9,22 @@
       flex-direction: column;
       align-items: center;
       padding-top: 50px;
+
+      height: 100vh;
+      font-family: sans-serif;
+      width: 100%;
+      
+    }
+
+    .app {
+      width: 100%;
+
       background-color: #e1e3ea;
       height: 100vh;
       font-family: sans-serif;
     }
 
-    .app {
-      width: 60%;
-    }
-
-    @media (max-width:768px) {
-      .app {
-        width: 90%;
-      }
+    
     }
 
     .app h1 {
@@ -66,7 +69,9 @@
     }
 
     .app ul li {
-      padding: 10px;
+
+      padding: 10px 30px;
+
       background-color: rgb(244,59,134);
       border-bottom: 1px solid rgb(17,5,44);
     }

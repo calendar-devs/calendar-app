@@ -14,7 +14,7 @@
 
 <body>
   <header>
-    <h1>Calendar Site</h1>
+    <h1>🗓️ Calendar Site</h1>
     <nav>
       <ol>
         <li>Home</li>
@@ -22,38 +22,45 @@
         <li>Login</li>
       </ol>
     </nav>
-
   </header>
 
-  <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+  <div class='both'>
+    <div class='combined'>
+      <aside>
+        <div class="container">
+          <div class="app">
+            <h2>TO DO LIST</h2>
 
-  <section id='calendar' class='calendar' >
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span id="close-button" class="close">&times;</span>
-        <p>Some text in the Modal..</p>
-        <form id="form"></form>
+            <form>
+              <input type="text" placeholder="Add new task...">
+              <button type="submit">&plus;</button>
+            </form>
+            <ul></ul>
+          </div>
+        </div>
+      </aside>
+
+
+      <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+      <div class='combined'>
+        <section id='calendar' class='calendar'>
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <span id="close-button" class="close">&times;</span>
+              <p>Some text in the Modal..</p>
+              <form id="form"></form>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
-  </section>
-  <aside>
-    <div class="container">
-      <div class="app">
-        <h2>TO DO LIST</h2>
-        
-        <form>
-          <input type="text" placeholder="Add new task...">
-          <button type="submit">&plus;</button>
-        </form>
-        <ul></ul>
-      </div>
-    </div>
-  </aside>
-  <footer>
 
-  </footer>
-  <script src='list.js'></script>
-  <script src='app.js'></script>
+    <footer>
+      &copy Brandon, Kiengchay. Jaye, Josh
+    </footer>
+    <script src='list.js'></script>
+    <script src='app.js'></script>
+
 </body>
 
 </html>
