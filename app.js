@@ -8,6 +8,9 @@ const year = 23;
 // DOM WINDOW
 let toDoList = document.getElementById('to-do-list');
 let calendar = document.getElementById('calendar');
+let modal = document.getElementById('modal');
+let closeButton = document.getElementById('close-button');
+let form = document.getElementById('form');
 
 // Month contructor
 function Month(nameOfMonth, numberOfDays, keyValue, index) {
@@ -21,8 +24,7 @@ function Month(nameOfMonth, numberOfDays, keyValue, index) {
   months.push(this);
 }
 
-Month.prototype.render = function() {
-
+Month.prototype.render = function () {
   let monthDiv = document.createElement('div');
   monthDiv.id = this.nameOfMonth;
 
@@ -36,34 +38,67 @@ Month.prototype.render = function() {
   let headRow = document.createElement('tr');
 
   // Make a th for each day of the week
-  for(let i = 0; i < daysOfWeek.length; i++) {
+  for (let i = 0; i < daysOfWeek.length; i++) {
     let th = document.createElement('th');
     th.textContent = daysOfWeek[i];
     headRow.appendChild(th);
   }
 
+  let counter = 1;
   let tbody = document.createElement('tbody');
-  for(let i = 0; i < this.numberOfWeeks; i++) {
+
+  // Loops through the number of weeks each month has and creates a row for each week
+  for (let i = 0; i < this.numberOfWeeks; i++) {
     let tr = document.createElement('tr');
+    // if this is the first week, then start the counter on whichever day of the week the month starts
+    // if it's the not first week, then start the counter on Sunday because the other weeks is always a full week
+    if (i === 0) {
+      console.log('week 1');
+      // Loops through the days of the week
+      for (let i = 0; i < daysOfWeek.length; i++) {
+        let td = document.createElement('td');
+        td.addEventListener('click', handleDateClick);
+        if (i >= this.startDay) {
+          if (counter > this.numberOfDays) {
+            td.textContent = ` `;
+            console.log('week loop');
+          } else {
 
-    for(let i = 0; i < daysOfWeek.length; i++) {
-      let td = document.createElement('td');
-      tr.appendChild(td);
+            td.textContent = counter++;
+          }
+        }
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+
+    } else {
+      for (let i = 0; i < daysOfWeek.length; i++) {
+        let td = document.createElement('td');
+        td.addEventListener('click', handleDateClick);
+        tr.appendChild(td);
+        if (counter > this.numberOfDays) {
+          td.textContent = ` `;
+        } else {
+          td.textContent = counter++;
+        }
+
+      }
+      tbody.appendChild(tr);
     }
-    tbody.appendChild(tr);
-  }
 
+  }
   thead.appendChild(headRow);
   table.appendChild(tbody);
   table.appendChild(thead);
   monthDiv.appendChild(table);
   calendar.appendChild(monthDiv);
 };
-
 // Month instances
 let jan = new Month('January', 31, 1, 0);
 let feb = new Month('February', 28, 4, 1);
 let mar = new Month('March', 31, 4, 2);
+let apr = new Month('April', 30, 0, 3);
+let may = new Month('May', 31, 2, 4);
 
 function getNumWeeks(month, firstDay) {
   let dayThreshold = [5, 1, 5, 6, 5, 6, 5, 5, 6, 5, 6, 5];
@@ -73,10 +108,19 @@ function getNumWeeks(month, firstDay) {
   return baseWeeks + (firstDay >= dayThreshold[month] ? 1 : 0); // add an extra week if the month starts beyond the threshold day.
 }
 
-for(let i = 0; i < months.length; i++) {
+function handleDateClick(e){
+  modal.style.display = 'block';
+}
+
+function handleCloseClick(e){
+  modal.style.display = 'none';
+}
+
+for (let i = 0; i < months.length; i++) {
   months[i].render();
 }
 
+closeButton.addEventListener('click', handleCloseClick);
 
 
 
