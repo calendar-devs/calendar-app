@@ -32,7 +32,16 @@
       <div class="modal-content">
         <span id="close-button" class="close">&times;</span>
         <p>Some text in the Modal..</p>
-        <form id="form"></form>
+        <form id="add-event-form">
+          <fieldset>
+            <legend>Add new event</legend>
+            <label for="event-title">Event title</label>
+            <input type="text" name="eventTitle" id="event-title">
+            <label for="event-time">Event time</label>
+            <select id="times"></select>
+            <input type="submit" value="Add event">
+          </fieldset>
+        </form>
       </div>
     </div>
   </section>
@@ -41,7 +50,7 @@
       <div class="app">
         <h2>TO DO LIST</h2>
         
-        <form>
+        <form class="todo-form">
           <input type="text" placeholder="Add new task...">
           <button type="submit">&plus;</button>
         </form>
@@ -52,8 +61,9 @@
   <footer>
 
   </footer>
-  <script src='list.js'></script>
   <script src='app.js'></script>
+  <script src='modal.js'></script>
+  <script src='list.js'></script>
 </body>
 
 </html>

@@ -10,7 +10,8 @@ let toDoList = document.getElementById('to-do-list');
 let calendar = document.getElementById('calendar');
 let modal = document.getElementById('modal');
 let closeButton = document.getElementById('close-button');
-let form = document.getElementById('form');
+let selectedDay = null;
+// let addEventForm = document.getElementById('add-event-form');
 
 // Month contructor
 function Month(nameOfMonth, numberOfDays, keyValue, index) {
@@ -55,15 +56,16 @@ Month.prototype.render = function () {
     if (i === 0) {
       console.log('week 1');
       // Loops through the days of the week
-      for (let i = 0; i < daysOfWeek.length; i++) {
+      for (let j = 0; j < daysOfWeek.length; j++) {
         let td = document.createElement('td');
-        td.addEventListener('click', handleDateClick);
-        if (i >= this.startDay) {
+        
+        if (j >= this.startDay) {
           if (counter > this.numberOfDays) {
-            td.textContent = ` `;
+            td.textContent = ' ';
             console.log('week loop');
           } else {
-
+            td.addEventListener('click', handleDateClick);
+            td.id = `${this.nameOfMonth}${counter}`;
             td.textContent = counter++;
           }
         }
@@ -72,13 +74,14 @@ Month.prototype.render = function () {
       tbody.appendChild(tr);
 
     } else {
-      for (let i = 0; i < daysOfWeek.length; i++) {
+      for (let j = 0; j < daysOfWeek.length; j++) {
         let td = document.createElement('td');
-        td.addEventListener('click', handleDateClick);
         tr.appendChild(td);
         if (counter > this.numberOfDays) {
-          td.textContent = ` `;
+          td.textContent = ' ';
         } else {
+          td.addEventListener('click', handleDateClick);
+          td.id = `${this.nameOfMonth}${counter}`;
           td.textContent = counter++;
         }
 
@@ -93,6 +96,25 @@ Month.prototype.render = function () {
   monthDiv.appendChild(table);
   calendar.appendChild(monthDiv);
 };
+
+function Day(eventsOfDay) {
+  this.eventsOfDay = eventsOfDay;
+}
+
+Day.prototype.addEvent = function(time, title) {
+  let newEvent = new DayEvent(time, title);
+  this.eventsOfDay.push(newEvent);
+};
+
+Day.prototype.saveToLocalStorage = function(date) {
+  localStorage.setItem(date, JSON.stringify(this.eventsOfDay));
+};
+
+function DayEvent(time, title) {
+  this.time = time;
+  this.title = title;
+}
+
 // Month instances
 let jan = new Month('January', 31, 1, 0);
 let feb = new Month('February', 28, 4, 1);
@@ -110,6 +132,8 @@ function getNumWeeks(month, firstDay) {
 
 function handleDateClick(e){
   modal.style.display = 'block';
+  selectedDay = e.target;
+  // console.log(e.target.id);
 }
 
 function handleCloseClick(e){

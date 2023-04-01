@@ -1,3 +1,39 @@
 'use strict';
 
-let hours = ['12AM','1AM','2AM','3AM'];
+let hours = ['12AM','1AM','2AM','3AM','4AM','5AM','6AM','7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM','10PM','11PM'];
+let addEventForm = document.getElementById('add-event-form');
+
+// Adds all the hours to the dropdown in the modal
+function populateTimes() {
+  const selectElement = document.getElementById('times');
+  for (let i = 0; i < hours.length; i++) {
+    let option = document.createElement('option');
+    option.value = hours[i];
+    option.textContent = hours[i];
+    selectElement.appendChild(option);
+  }
+}
+
+function handleAddEvent(event) {
+  event.preventDefault();
+  let submittedTime = document.getElementById('times').value;
+  let eventTitle = event.target.eventTitle.value;
+  console.log(eventTitle);
+  console.log(submittedTime);
+
+  let day;
+  if (localStorage.getItem(selectedDay.id)) {
+    day = new Day(JSON.parse(localStorage.getItem(selectedDay.id)));
+  } else {
+    day = new Day([]);
+  }
+
+  day.addEvent(submittedTime, eventTitle);
+  day.saveToLocalStorage(selectedDay.id);
+  console.log('day', day);
+
+}
+
+populateTimes();
+addEventForm.addEventListener('submit', handleAddEvent);
+
