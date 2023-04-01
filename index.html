@@ -8,28 +8,25 @@
   <link rel='stylesheet' href='./styles/reset.css'>
   <link rel='stylesheet' href='./styles/styles.css'>
   <title>calendar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/to-do.css">
 </head>
 
 <body>
   <header>
     <h1>Calendar Site</h1>
     <nav>
-      <ul>
+      <ol>
         <li>Home</li>
         <li>About</li>
         <li>Login</li>
-      </ul>
+      </ol>
     </nav>
 
   </header>
 
-
-  <aside id='to-do-list' class='to-do-list'>
-  <p>to-do list</p>
-
-  </aside>
-
   <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+
   <section id='calendar' class='calendar' >
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -39,11 +36,23 @@
       </div>
     </div>
   </section>
-
-
+  <aside>
+    <div class="container">
+      <div class="app">
+        <h2>TO DO LIST</h2>
+        
+        <form>
+          <input type="text" placeholder="Add new task...">
+          <button type="submit">&plus;</button>
+        </form>
+        <ul></ul>
+      </div>
+    </div>
+  </aside>
   <footer>
 
   </footer>
+  <script src='list.js'></script>
   <script src='app.js'></script>
 </body>
 
