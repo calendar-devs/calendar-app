@@ -4,7 +4,7 @@
 window.onload = loadTasks;
 
 // On form submit add task
-document.querySelector('form').addEventListener('submit', e => {
+document.querySelector('.todo-form').addEventListener('submit', e => {
   e.preventDefault();
   addTask();
 });
@@ -29,7 +29,7 @@ function loadTasks() {
 }
 
 function addTask() {
-  const task = document.querySelector('form input');
+  const task = document.querySelector('.todo-form');
   const list = document.querySelector('ul');
   // return if task is empty
   if (task.value === '') {
@@ -37,10 +37,10 @@ function addTask() {
     return false;
   }
   // check is task already exist
-  if (document.querySelector(`input[value='${task.value}']`)) {
-    alert('Task already exist!');
-    return false;
-  }
+  // if (document.querySelector(`input[value='${task.value}']`)) {
+  //   alert('Task already exist!');
+  //   return false;
+  // }
 
   // add task to local storage
   localStorage.setItem('tasks', JSON.stringify([...JSON.parse(localStorage.getItem('tasks') || '[]'), { task: task.value, completed: false }]));
