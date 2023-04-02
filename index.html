@@ -24,50 +24,45 @@
     </nav>
   </header>
 
-  <div class='both'>
-    <div class='combined'>
-  <aside>
-    <div class="container">
-      <div class="app">
-        <h2>TO DO LIST</h2>
-        
-        <form class="todo-form">
-          <input type="text" placeholder="Add new task...">
-          <button type="submit">&plus;</button>
-        </form>
-        <ul></ul>
-          </div>
+  <div class='combined'>
+    <aside>
+      <div class="container">
+        <div class="app">
+          <h2>TO DO LIST</h2>
+
+          <form class="todo-form">
+            <input type="text" placeholder="Add new task...">
+            <button type="submit">&plus;</button>
+          </form>
+          <ul></ul>
         </div>
-      </aside>
+      </div>
+    </aside>
 
-
-      <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
-      <div class='combined'>
-      <section id='calendar' class='calendar' >
-        <div id="modal" class="modal">
-          <div class="modal-content">
-            <span id="close-button" class="close">&times;</span>
-            <div id="events-container"></div>
-            <form id="add-event-form">
-              <fieldset>
-                <legend>Add new event</legend>
-                <label for="event-title">Event title</label>
-                <input type="text" name="eventTitle" id="event-title" maxLength="10">
-                <label for="event-time">Event time</label>
-                <select id="times"></select>
-                <input type="submit" value="Add event">
-              </fieldset>
-            </form>
-          </div>
+    <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <section id='calendar' class='calendar'>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span id="close-button" class="close">&times;</span>
+          <div id="events-container"></div>
+          <form id="add-event-form">
+            <fieldset>
+              <legend>Add new event</legend>
+              <label for="event-title">Event title</label>
+              <input type="text" name="eventTitle" id="event-title" maxLength="10">
+              <label for="event-time">Event time</label>
+              <select id="times"></select>
+              <input type="submit" value="Add event">
+            </fieldset>
+          </form>
         </div>
-      </section>
-    </div>
-
-</div>
-    <footer>
-      &copy Brandon, Kiengchay. Jaye, Josh
-    </footer>
-   <script src='app.js'></script>
+      </div>
+    </section>
+  </div>
+  <footer>
+    &copy Brandon, Kiengchay. Jaye, Josh
+  </footer>
+  <script src='app.js'></script>
   <script src='modal.js'></script>
   <script src='list.js'></script>
 </body>
