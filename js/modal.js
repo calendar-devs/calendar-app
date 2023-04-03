@@ -45,7 +45,6 @@ function displayEventsToModal(td) {
   }
   // clear all events in the td (day) first so that events don't show doubles on the calendar
   // when displaying.
- 
   let allEventsInDay = document.getElementById('events-container');
   allEventsInDay.innerHTML = '';
 
@@ -53,37 +52,31 @@ function displayEventsToModal(td) {
   for (let i = 0; i < day.eventsOfDay.length; i++) {
     let newEventDiv = document.createElement('div');
     newEventDiv.classList.add('added-events');
-    
+    newEventDiv.id = i;
     let eventTimeDisplay = document.createElement('p');
     let eventTitleDisplay = document.createElement('p');
     eventTimeDisplay.textContent = day.eventsOfDay[i].time;
     eventTitleDisplay.textContent = day.eventsOfDay[i].title;
-    
-    newEventDiv.id = i;
-    
+
     let removeButton = document.createElement('button');
     removeButton.classList.add('remove');
     removeButton.textContent = '❌';
-    newEventDiv.appendChild(removeButton);
-
     removeButton.addEventListener('click', function(){handleRemoveEvent(newEventDiv.id, td, day);});
 
+    newEventDiv.appendChild(removeButton);
     newEventDiv.appendChild(eventTimeDisplay);
     newEventDiv.appendChild(eventTitleDisplay);
-    // td.appendChild(newEventDiv);
     allEventsInDay.appendChild(newEventDiv);
   }
-  // }
 }
 
 function handleRemoveEvent(eventID, date, day){
-
   day.removeEvent(eventID, date.id);
   console.log('day', day);
-  
-  displayEventsToModal(date.id);
-
+  displayEventsToCalendar(date);
+  displayEventsToModal(date);
 }
 
-populateTimes();
 addEventForm.addEventListener('submit', handleAddEvent);
+
+populateTimes();
