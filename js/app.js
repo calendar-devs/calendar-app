@@ -110,17 +110,25 @@ function displayCounter(month, counter, numberOfDays, td) {
     td.id = `${month}${counter}`;
     td.textContent = counter++;
     displayEventsToCalendar(td);
+    td.classList.add('calendar-date');
     td.addEventListener('click', handleDateClick);
   }
   return counter;
 }
 
+/**
+ * Calculates how many weeks there are in a given month.
+ * @param {Number} month - A month index. (0-January, 1-Febraury, etc.)
+ * @param {Number} firstDay - The index of the first day of the month (0-Sunday, 1-Monday, etc.)
+ * @returns a number of how many weeks there are in the given month
+ */
 function getNumWeeks(month, firstDay) {
   let dayThreshold = [5, 1, 5, 6, 5, 6, 5, 5, 6, 5, 6, 5];
   let baseWeeks = (month === 1 ? 4 : 5); // only February can fit in 4 weeks
   return baseWeeks + (firstDay >= dayThreshold[month] ? 1 : 0); // add an extra week if the month starts beyond the threshold day.
 }
 
+// Makes modal appear when you click on a day in the calendar
 function handleDateClick(e) {
   modal.style.display = 'block';
   // selectedDay = e.target;
@@ -178,15 +186,6 @@ function monthDropDown() {
 // Only renders the month that the user selects
 function handleMonthSubmit(e) {
   e.preventDefault(); // prevents instant form refresh
-  // calendar.innerHTML = ''; // erases all calendars from display
-  // let selectedMonth = document.getElementById('select-month').value;
-
-  // // renders only the calendar that the user selected
-  // for(let i = 0; i < months.length; i++){
-  //   if(selectedMonth === months[i].nameOfMonth) {
-  //     months[i].render();
-  //   }
-  // }
   renderMonth();
 }
 
