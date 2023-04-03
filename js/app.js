@@ -26,10 +26,13 @@ function Month(nameOfMonth, numberOfDays, keyValue, index) {
   months.push(this);
 }
 
+// Renders month onto index page
 Month.prototype.render = function () {
   let monthDiv = document.createElement('div');
   monthDiv.id = this.nameOfMonth;
+  monthDiv.classList.add('month-div');
 
+  // add name of month
   let h2 = document.createElement('h2');
   h2.textContent = this.nameOfMonth;
   monthDiv.appendChild(h2);
@@ -51,13 +54,13 @@ Month.prototype.render = function () {
 
   // Loops through the number of weeks each month has and creates a row for each week
   for (let i = 0; i < this.numberOfWeeks; i++) {
-    // Loops through the days of the week
     let tr = document.createElement('tr');
-    for(let j = 0; j < daysOfWeek.length; j++) {
+    // Loops through the days of the week and creates a td for each day
+    for (let j = 0; j < daysOfWeek.length; j++) {
       let td = document.createElement('td');
       // if this is the first week, then start the counter on whichever day of the week the month starts
       // if it's the not first week, then start the counter on Sunday because the other weeks is always a full week
-      if (i === 0){
+      if (i === 0) {
         if (j >= this.startDay) {
           counter = displayCounter(this.nameOfMonth, counter, this.numberOfDays, td);
         }
@@ -85,7 +88,7 @@ Day.prototype.addEvent = function (time, title) {
   this.eventsOfDay.push(newEvent);
 };
 
-Day.prototype.removeEvent = function(eventIndex, date){
+Day.prototype.removeEvent = function (eventIndex, date) {
   this.eventsOfDay.splice(eventIndex, 1);
   this.saveToLocalStorage(date);
 };
@@ -164,7 +167,7 @@ function displayEventsToCalendar(td) {
 // populates month dropdown for user to select which month they want to view
 function monthDropDown() {
   const selectElement = document.getElementById('select-month');
-  for(let i = 0; i < months.length; i++) {
+  for (let i = 0; i < months.length; i++) {
     let option = document.createElement('option');
     option.value = months[i].nameOfMonth;
     option.textContent = months[i].nameOfMonth;
@@ -175,19 +178,45 @@ function monthDropDown() {
 // Only renders the month that the user selects
 function handleMonthSubmit(e) {
   e.preventDefault(); // prevents instant form refresh
+  // calendar.innerHTML = ''; // erases all calendars from display
+  // let selectedMonth = document.getElementById('select-month').value;
+
+  // // renders only the calendar that the user selected
+  // for(let i = 0; i < months.length; i++){
+  //   if(selectedMonth === months[i].nameOfMonth) {
+  //     months[i].render();
+  //   }
+  // }
+  renderMonth();
+}
+
+// Renders whichever month the user selects
+function renderMonth() {
   calendar.innerHTML = ''; // erases all calendars from display
   let selectedMonth = document.getElementById('select-month').value;
 
   // renders only the calendar that the user selected
-  for(let i = 0; i < months.length; i++){
-    if(selectedMonth === months[i].nameOfMonth) {
+  for (let i = 0; i < months.length; i++) {
+    if (selectedMonth === months[i].nameOfMonth) {
       months[i].render();
+    }
+  }
+  loadBackground();
+}
+
+// Loads the calendar background from localStorage
+function loadBackground() {
+  let getBackground = localStorage.getItem('background');
+  if (getBackground) {
+    let allMonths = document.querySelectorAll('.month-div');
+    for (let i = 0; i < allMonths.length; i++) {
+      allMonths[i].style.backgroundImage = `url('${JSON.parse(getBackground)}')`;
     }
   }
 }
 
 // Month instances
-function generateMonths(){
+function generateMonths() {
   let jan = new Month('January', 31, 1, 0);
   let feb = new Month('February', 28, 4, 1);
   let mar = new Month('March', 31, 4, 2);
@@ -204,19 +233,20 @@ function generateMonths(){
   // automatically renders whatever the current month is
   const getDate = new Date();
   const currentMonth = getDate.getMonth(); // returns an index. 0=January, 1=February etc.
-  for(let i = 0; i < months.length; i++) {
+  for (let i = 0; i < months.length; i++) {
     if (i === currentMonth) {
       months[i].render();
     }
   }
 }
 
-generateMonths();
-monthDropDown();
-
 // EVENT LISTENERS
 closeButton.addEventListener('click', handleCloseClick);
 selectMonth.addEventListener('submit', handleMonthSubmit);
+
+// FUNCTION CALLS
+generateMonths();
+monthDropDown();
 
 // for (let i = 0; i < months.length; i++) {
 //   months[i].render();

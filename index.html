@@ -49,6 +49,14 @@
           <input type="submit" value="Go to month">
         </fieldset>
       </form>
+      <form id="add-background">
+        <fieldset>
+          <label for="calendar-background">Add a calendar background:</label>
+          <input type="text" name="background" id="calendar-background" placeholder="paste url" required>
+          <input type="submit" value="Add background">
+          <button id="remove-background-btn" type="button">Remove background</button>
+        </fieldset>
+      </form>
       <div id="calendar-container"></div>
       <div id="modal" class="modal">
         <div class="modal-content">
@@ -73,6 +81,7 @@
   </footer>
   <script src='./js/app.js'></script>
   <script src='./js/modal.js'></script>
+  <script src="./js/background.js"></script>
   <script src='./js/list.js'></script>
 </body>
 
