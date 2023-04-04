@@ -45,10 +45,7 @@ function displayEventsToModal(td) {
   }
   // clear all events in the td (day) first so that events don't show doubles on the calendar
   // when displaying.
-  // let allEventsInDay = document.querySelectorAll(`#${td.id} .added-events`);
-  // for (let i = 0; i < allEventsInDay.length; i++) {
-  //   allEventsInDay[i].remove();
-  // }
+ 
   let allEventsInDay = document.getElementById('events-container');
   allEventsInDay.innerHTML = '';
 
@@ -63,7 +60,6 @@ function displayEventsToModal(td) {
     eventTitleDisplay.textContent = day.eventsOfDay[i].title;
     
     newEventDiv.id = i;
-    
     
     let removeButton = document.createElement('button');
     removeButton.classList.add('remove');

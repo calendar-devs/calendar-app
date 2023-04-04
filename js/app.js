@@ -50,48 +50,24 @@ Month.prototype.render = function () {
 
   // Loops through the number of weeks each month has and creates a row for each week
   for (let i = 0; i < this.numberOfWeeks; i++) {
+    // Loops through the days of the week
     let tr = document.createElement('tr');
-    // if this is the first week, then start the counter on whichever day of the week the month starts
-    // if it's the not first week, then start the counter on Sunday because the other weeks is always a full week
-    if (i === 0) {
-      console.log('week 1');
-      // Loops through the days of the week
-      for (let j = 0; j < daysOfWeek.length; j++) {
-        let td = document.createElement('td');
-
+    for(let j = 0; j < daysOfWeek.length; j++) {
+      let td = document.createElement('td');
+      // if this is the first week, then start the counter on whichever day of the week the month starts
+      // if it's the not first week, then start the counter on Sunday because the other weeks is always a full week
+      if (i === 0){
         if (j >= this.startDay) {
-          if (counter > this.numberOfDays) {
-            td.textContent = ' ';
-            console.log('week loop');
-          } else {
-            td.id = `${this.nameOfMonth}${counter}`;
-            td.textContent = counter++;
-            displayEventsToCalendar(td);
-            td.addEventListener('click', handleDateClick);
-          }
+          counter = displayCounter(this.nameOfMonth, counter, this.numberOfDays, td);
         }
-        tr.appendChild(td);
+      } else {
+        counter = displayCounter(this.nameOfMonth, counter, this.numberOfDays, td);
       }
-      tbody.appendChild(tr);
-
-    } else {
-      for (let j = 0; j < daysOfWeek.length; j++) {
-        let td = document.createElement('td');
-        tr.appendChild(td);
-        if (counter > this.numberOfDays) {
-          td.textContent = ' ';
-        } else {
-          td.id = `${this.nameOfMonth}${counter}`;
-          td.textContent = counter++;
-          displayEventsToCalendar(td);
-          td.addEventListener('click', handleDateClick);
-        }
-
-      }
-      tbody.appendChild(tr);
+      tr.appendChild(td);
     }
-
+    tbody.appendChild(tr);
   }
+
   thead.appendChild(headRow);
   table.appendChild(tbody);
   table.appendChild(thead);
@@ -123,11 +99,33 @@ function DayEvent(time, title) {
 }
 
 // Month instances
-let jan = new Month('January', 31, 1, 0);
-let feb = new Month('February', 28, 4, 1);
-let mar = new Month('March', 31, 4, 2);
-let apr = new Month('April', 30, 0, 3);
-let may = new Month('May', 31, 2, 4);
+function generateMonths(){
+  let jan = new Month('January', 31, 1, 0);
+  let feb = new Month('February', 28, 4, 1);
+  let mar = new Month('March', 31, 4, 2);
+  let apr = new Month('April', 30, 0, 3);
+  let may = new Month('May', 31, 2, 4);
+  let jun = new Month('June', 30, 5, 5);
+  let jul = new Month('July', 31, 0, 6);
+  let aug = new Month('August', 31, 3, 7);
+  let sep = new Month('September', 30, 6, 8);
+  let oct = new Month('October', 31, 1, 9);
+  let nov = new Month('November', 30, 4, 10);
+  let dec = new Month('December', 31, 6, 11);
+}
+
+// Displays the day of the month on the events of that day
+function displayCounter(month, counter, numberOfDays, td) {
+  if (counter > numberOfDays) {
+    td.textContent = ' ';
+  } else {
+    td.id = `${month}${counter}`;
+    td.textContent = counter++;
+    displayEventsToCalendar(td);
+    td.addEventListener('click', handleDateClick);
+  }
+  return counter;
+}
 
 function getNumWeeks(month, firstDay) {
   let dayThreshold = [5, 1, 5, 6, 5, 6, 5, 5, 6, 5, 6, 5];
@@ -167,25 +165,24 @@ function displayEventsToCalendar(td) {
     for (let i = 0; i < day.eventsOfDay.length; i++) {
       let newEventDiv = document.createElement('div');
       newEventDiv.classList.add('added-events');
-      let eventTimeDispay = document.createElement('p');
+      let eventTimeDisplay = document.createElement('p');
       let eventTitleDisplay = document.createElement('p');
-      eventTimeDispay.textContent = day.eventsOfDay[i].time;
+      eventTimeDisplay.textContent = day.eventsOfDay[i].time;
       eventTitleDisplay.textContent = day.eventsOfDay[i].title;
    
-      newEventDiv.appendChild(eventTimeDispay);
+      newEventDiv.appendChild(eventTimeDisplay);
       newEventDiv.appendChild(eventTitleDisplay);
       td.appendChild(newEventDiv);
     }
   }
 }
 
+
+closeButton.addEventListener('click', handleCloseClick);
+
+generateMonths();
+
 for (let i = 0; i < months.length; i++) {
   months[i].render();
 }
-
-closeButton.addEventListener('click', handleCloseClick);
-// addEventForm.addEventListener('submit', handleAddEvent);
-
-
-
 

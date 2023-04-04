@@ -29,7 +29,7 @@ function loadTasks() {
 }
 
 function addTask() {
-  const task = document.querySelector('.todo-form');
+  const task = document.querySelector('.todo-form input');
   const list = document.querySelector('ul');
   // return if task is empty
   if (task.value === '') {
