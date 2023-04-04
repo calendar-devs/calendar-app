@@ -1,20 +1,28 @@
 body {
-  background-color: azure;
+  background-color: rgb(219, 219, 219);
 }
 
 header {
   align-items: center;
-  border-bottom: 9px ridge rgb(61, 8, 123);
+  border-bottom: 9px  rgb(61, 8, 123);
+  background-color: #213343;
   display: flex;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   justify-content: space-between;
   padding-left: 30px;
-
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: #B6C7D6;
 }
 
 h1 {
-  font-size: 45px;
+  font-size: 55px;
   padding: 10px;
+}
+
+.calendar h2 {
+  font-size: 35px;
+  text-align: center;
 }
 
 ol {
@@ -26,6 +34,10 @@ ol {
 
 ol>li {
   padding: 10px;
+  margin-right: 40px;
+  background-color: #FF5C35 ;
+  color: whitesmoke;
+  border-radius: 10px;
 }
 
 aside h2 {
@@ -37,6 +49,7 @@ aside h2 {
 .combined {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   padding: 15px;
   max-width: 100%;
 }
@@ -107,4 +120,22 @@ td,
 th {
   border: 1px solid black;
   padding: 20px;
+}
+
+td {
+  height: 5em;
+  width: 4em;
+  font-size: 20px;
+ 
+}
+
+.added-events {
+  font-size: 15px;
+  padding-top: 3px;
+  background-color: #355EFF;
+    border-radius: 5%;
+  padding: 5px;
+  /* padding-left: 5px; */
+  margin: 3px;
+  color: whitesmoke;
 }
