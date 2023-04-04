@@ -37,10 +37,10 @@ function addTask() {
     return false;
   }
   // check is task already exist
-  // if (document.querySelector(`input[value='${task.value}']`)) {
-  //   alert('Task already exist!');
-  //   return false;
-  // }
+  if (document.querySelector(`input[value='${task.value}']`)) {
+    alert('Task already exist!');
+    return false;
+  }
 
   // add task to local storage
   localStorage.setItem('tasks', JSON.stringify([...JSON.parse(localStorage.getItem('tasks') || '[]'), { task: task.value, completed: false }]));
