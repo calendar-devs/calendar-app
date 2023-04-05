@@ -1,6 +1,7 @@
 'use strict';
 
 let hours = ['12AM','1AM','2AM','3AM','4AM','5AM','6AM','7AM','8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM','7PM','8PM','9PM','10PM','11PM'];
+let completeEvents = [];
 
 // Adds all the hours to the dropdown in the modal
 function populateTimes() {
@@ -67,14 +68,26 @@ function displayEventsToModal(td) {
     newEventDiv.appendChild(eventTimeDisplay);
     newEventDiv.appendChild(eventTitleDisplay);
     allEventsInDay.appendChild(newEventDiv);
+
+    let doneButton = document.createElement('button');
+    doneButton.classList.add('complete');
+    doneButton.textContent = '✅';
+    newEventDiv.appendChild(doneButton);
+
+    doneButton.addEventListener('click', function(){handleCompleteEvent(newEventDiv, td, day);});
+
   }
 }
 
 function handleRemoveEvent(eventID, date, day){
   day.removeEvent(eventID, date.id);
-  console.log('day', day);
   displayEventsToCalendar(date);
   displayEventsToModal(date);
+}
+
+function handleCompleteEvent(eventName, date, day){
+  completeEvents.push(`${date.id}`);
+  handleRemoveEvent(eventName, date, day);
 }
 
 addEventForm.addEventListener('submit', handleAddEvent);
