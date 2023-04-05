@@ -18,7 +18,6 @@
 
     .app {
       width: 100%;
-
       /* background-color: #e1e3ea; */
       height: 100vh;
       font-family: sans-serif;
@@ -47,7 +46,7 @@
 
     .app form input {
       border: none;
-      background-color: #355EFF;
+      background-color: #698191;
       font-size: 18px;
       color: white;
       padding: 10px;
@@ -57,7 +56,7 @@
     .app form button {
       border: none;
       color: white;
-      background-color:#35FFAC;
+      background-color:#a8bbc8;
       font-size: 25px;
       font-weight: 600;
       height: 42px;
@@ -71,11 +70,9 @@
     }
 
     .app ul li {
-
       padding: 10px 30px;
-
-      background-color: #FF5C35;
       border-bottom: 1px solid rgb(17,5,44);
+      background-color: #294754;
     }
 
     .check {
@@ -89,7 +86,7 @@
     }
 
     .check:checked {
-      background-color:#355EFF;
+      background-color:#f8be45;
     }
 
     .task {
@@ -101,6 +98,11 @@
       color: #fff;
     }
 
+    ::placeholder {
+      color: rgb(158, 158, 158);
+    }
+    
+
     .task:focus {
       outline: none;
     }
@@ -111,7 +113,7 @@
     }
 
     .app ul li i:hover {
-      color: #355EFF;
+      color: #f8be45;
     }
 
     .completed {
