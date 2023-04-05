@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='./styles/reset.css'>
-  <link rel='stylesheet' href='./styles/styles.css'>
-  <title>calendar</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel='stylesheet' href='./styles/styles.css'>
   <link rel="stylesheet" href="styles/to-do.css">
+  <link rel="icon" href="img/favicon.png"> <!-- Favicon source: Tear-Off Calendar icon by Icons8 -->
+  <title>calendar</title>
 </head>
 
 <body>
@@ -39,8 +40,16 @@
       </div>
     </aside>
 
-    <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <!-- Modal source: https://www.w3schools.com/howto/howto_css_modals.asp -->
     <section id='calendar' class='calendar'>
+      <form id="month-dropdown" class="month-dropdown">
+        <fieldset>
+          <label for="select-month">Select a month:</label>
+          <select id="select-month"></select>
+          <input type="submit" value="Go to month">
+        </fieldset>
+      </form>
+      <div id="calendar-container"></div>
       <div id="modal" class="modal">
         <div class="modal-content">
           <span id="close-button" class="close">&times;</span>
@@ -49,8 +58,8 @@
             <fieldset>
               <legend>Add new event</legend>
               <label for="event-title">Event title</label>
-              <input type="text" name="eventTitle" id="event-title" maxLength="10">
-              <label for="event-time">Event time</label>
+              <input type="text" name="eventTitle" id="event-title" maxLength="15" required>
+              <label for="times">Event time</label>
               <select id="times"></select>
               <input type="submit" value="Add event">
             </fieldset>

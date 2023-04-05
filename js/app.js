@@ -7,7 +7,8 @@ const year = 23;
 
 // DOM WINDOW
 let toDoList = document.getElementById('to-do-list');
-let calendar = document.getElementById('calendar');
+let calendar = document.getElementById('calendar-container');
+let selectMonth = document.getElementById('month-dropdown');
 let modal = document.getElementById('modal');
 let closeButton = document.getElementById('close-button');
 let selectedDay = null;
@@ -98,22 +99,6 @@ function DayEvent(time, title) {
   this.title = title;
 }
 
-// Month instances
-function generateMonths(){
-  let jan = new Month('January', 31, 1, 0);
-  let feb = new Month('February', 28, 4, 1);
-  let mar = new Month('March', 31, 4, 2);
-  let apr = new Month('April', 30, 0, 3);
-  let may = new Month('May', 31, 2, 4);
-  let jun = new Month('June', 30, 5, 5);
-  let jul = new Month('July', 31, 0, 6);
-  let aug = new Month('August', 31, 3, 7);
-  let sep = new Month('September', 30, 6, 8);
-  let oct = new Month('October', 31, 1, 9);
-  let nov = new Month('November', 30, 4, 10);
-  let dec = new Month('December', 31, 6, 11);
-}
-
 // Displays the day of the month on the events of that day
 function displayCounter(month, counter, numberOfDays, td) {
   if (counter > numberOfDays) {
@@ -129,16 +114,14 @@ function displayCounter(month, counter, numberOfDays, td) {
 
 function getNumWeeks(month, firstDay) {
   let dayThreshold = [5, 1, 5, 6, 5, 6, 5, 5, 6, 5, 6, 5];
-  //   let firstDay = new Date(year, month, 1).getDay();
   let baseWeeks = (month === 1 ? 4 : 5); // only February can fit in 4 weeks
-  // TODO: account for leap years
   return baseWeeks + (firstDay >= dayThreshold[month] ? 1 : 0); // add an extra week if the month starts beyond the threshold day.
 }
 
 function handleDateClick(e) {
   modal.style.display = 'block';
-  selectedDay = this; // grabs the td that the user clicked on
   // selectedDay = e.target;
+  selectedDay = this; // grabs the td that the user clicked on
   console.log(selectedDay);
   displayEventsToModal(selectedDay);
   addEventForm.reset(); // clears the form for next event
@@ -166,23 +149,76 @@ function displayEventsToCalendar(td) {
       let newEventDiv = document.createElement('div');
       newEventDiv.classList.add('added-events');
       let eventTimeDisplay = document.createElement('p');
+      let hr = document.createElement('hr'); // line to seperate time from event title
       let eventTitleDisplay = document.createElement('p');
       eventTimeDisplay.textContent = day.eventsOfDay[i].time;
       eventTitleDisplay.textContent = day.eventsOfDay[i].title;
-   
       newEventDiv.appendChild(eventTimeDisplay);
+      newEventDiv.appendChild(hr);
       newEventDiv.appendChild(eventTitleDisplay);
       td.appendChild(newEventDiv);
     }
   }
 }
 
+// populates month dropdown for user to select which month they want to view
+function monthDropDown() {
+  const selectElement = document.getElementById('select-month');
+  for(let i = 0; i < months.length; i++) {
+    let option = document.createElement('option');
+    option.value = months[i].nameOfMonth;
+    option.textContent = months[i].nameOfMonth;
+    selectElement.appendChild(option);
+  }
+}
 
-closeButton.addEventListener('click', handleCloseClick);
+// Only renders the month that the user selects
+function handleMonthSubmit(e) {
+  e.preventDefault(); // prevents instant form refresh
+  calendar.innerHTML = ''; // erases all calendars from display
+  let selectedMonth = document.getElementById('select-month').value;
+
+  // renders only the calendar that the user selected
+  for(let i = 0; i < months.length; i++){
+    if(selectedMonth === months[i].nameOfMonth) {
+      months[i].render();
+    }
+  }
+}
+
+// Month instances
+function generateMonths(){
+  let jan = new Month('January', 31, 1, 0);
+  let feb = new Month('February', 28, 4, 1);
+  let mar = new Month('March', 31, 4, 2);
+  let apr = new Month('April', 30, 0, 3);
+  let may = new Month('May', 31, 2, 4);
+  let jun = new Month('June', 30, 5, 5);
+  let jul = new Month('July', 31, 0, 6);
+  let aug = new Month('August', 31, 3, 7);
+  let sep = new Month('September', 30, 6, 8);
+  let oct = new Month('October', 31, 1, 9);
+  let nov = new Month('November', 30, 4, 10);
+  let dec = new Month('December', 31, 6, 11);
+
+  // automatically renders whatever the current month is
+  const getDate = new Date();
+  const currentMonth = getDate.getMonth(); // returns an index. 0=January, 1=February etc.
+  for(let i = 0; i < months.length; i++) {
+    if (i === currentMonth) {
+      months[i].render();
+    }
+  }
+}
 
 generateMonths();
+monthDropDown();
 
-for (let i = 0; i < months.length; i++) {
-  months[i].render();
-}
+// EVENT LISTENERS
+closeButton.addEventListener('click', handleCloseClick);
+selectMonth.addEventListener('submit', handleMonthSubmit);
+
+// for (let i = 0; i < months.length; i++) {
+//   months[i].render();
+// }
 
