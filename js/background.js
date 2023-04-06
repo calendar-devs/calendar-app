@@ -9,6 +9,8 @@ let removeBackgroundBtn = document.getElementById('remove-background-btn');
 function handleAddBackground(e) {
   e.preventDefault(); // prevents instant form refresh
   let url = e.target.background.value;
+
+  // Sets background image for all months
   for(let i = 0; i < allMonths.length; i++) {
     allMonths[i].style.backgroundImage = `url('${url}')`;
   }

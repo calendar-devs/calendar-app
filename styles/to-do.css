@@ -96,8 +96,10 @@
       color: #fff;
     }
 
-    ::placeholder {
-      color: rgb(158, 158, 158);
+    .todo-form ::placeholder {
+      /* color: rgb(158, 158, 158); */
+      color: black;
+      font-weight: 600;
     }
     
 

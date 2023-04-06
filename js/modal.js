@@ -14,19 +14,23 @@ function populateTimes() {
   }
 }
 
-function handleAddEvent(event) {
-  event.preventDefault();
-  let submittedTime = document.getElementById('times').value;
-  let eventTitle = event.target.eventTitle.value;
-  console.log(eventTitle);
-  console.log(submittedTime);
-
+function checkLocalStorage(date) {
   let day;
-  if (localStorage.getItem(selectedDay.id)) {
-    day = new Day(JSON.parse(localStorage.getItem(selectedDay.id)));
+  if (localStorage.getItem(date)) {
+    day = new Day(JSON.parse(localStorage.getItem(date)));
   } else {
     day = new Day([]);
   }
+  return day;
+}
+
+function handleAddEvent(e) {
+  e.preventDefault();
+  let submittedTime = document.getElementById('times').value;
+  let eventTitle = e.target.eventTitle.value;
+  console.log(eventTitle);
+  console.log(submittedTime);
+  let day = checkLocalStorage(selectedDay.id);
 
   day.addEvent(submittedTime, eventTitle);
   day.saveToLocalStorage(selectedDay.id);
@@ -36,49 +40,56 @@ function handleAddEvent(event) {
   handleCloseClick();
 }
 
+// If the td (day) has an event added to it, append event(s) to the modal for that day
 function displayEventsToModal(td) {
-  // If the td (day) has an event added to it, append event to the calendar
-  let day;
-  if (localStorage.getItem(td.id)) {
-    day = new Day(JSON.parse(localStorage.getItem(td.id)));
-  } else {
-    day = new Day([]);
-  }
+  let day = checkLocalStorage(td.id);
+
   // clear all events in the td (day) first so that events don't show doubles on the calendar
   // when displaying.
   let allEventsInDay = document.getElementById('events-container');
   allEventsInDay.innerHTML = '';
 
-  // let day = new Day(JSON.parse(localStorage.getItem(td.id)));
+  // Adds all events in the day to modal
   for (let i = 0; i < day.eventsOfDay.length; i++) {
     let newEventDiv = document.createElement('div');
     newEventDiv.classList.add('added-events');
     newEventDiv.id = i;
     let eventTimeDisplay = document.createElement('p');
+    let hr = document.createElement('hr'); // line to seperate time from event title
     let eventTitleDisplay = document.createElement('p');
     eventTimeDisplay.textContent = day.eventsOfDay[i].time;
     eventTitleDisplay.textContent = day.eventsOfDay[i].title;
 
+    // Remove event button for each event
     let removeButton = document.createElement('button');
     removeButton.classList.add('remove');
     removeButton.textContent = '❌';
-    removeButton.addEventListener('click', function(){handleRemoveEvent(newEventDiv.id, td, day);});
+    removeButton.addEventListener('click', function(){
+      handleRemoveEvent(newEventDiv.id, td, day);
+    });
 
     newEventDiv.appendChild(removeButton);
     newEventDiv.appendChild(eventTimeDisplay);
+    newEventDiv.appendChild(hr);
     newEventDiv.appendChild(eventTitleDisplay);
     allEventsInDay.appendChild(newEventDiv);
 
-    let doneButton = document.createElement('button');
-    doneButton.classList.add('complete');
-    doneButton.textContent = '✅';
-    newEventDiv.appendChild(doneButton);
+    // let doneButton = document.createElement('button');
+    // doneButton.classList.add('complete');
+    // doneButton.textContent = '✅';
+    // newEventDiv.appendChild(doneButton);
 
-    doneButton.addEventListener('click', function(){handleCompleteEvent(newEventDiv, td, day);});
+    // doneButton.addEventListener('click', function(){handleCompleteEvent(newEventDiv, td, day);});
 
   }
 }
 
+/**
+ * Removes an event from the selected day and then updates the calendar and modal.
+ * @param {Number} eventID - The id of the event's div. It will be a number.
+ * @param {Element} date - The td element user is removing an event from
+ * @param {Object} day - The day object user is removing an event from
+ */
 function handleRemoveEvent(eventID, date, day){
   day.removeEvent(eventID, date.id);
   displayEventsToCalendar(date);
@@ -90,6 +101,8 @@ function handleCompleteEvent(eventName, date, day){
   handleRemoveEvent(eventName, date, day);
 }
 
+// EVENT LISTENERS
 addEventForm.addEventListener('submit', handleAddEvent);
 
+// FUNCTION CALLS
 populateTimes();
