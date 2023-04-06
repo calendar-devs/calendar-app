@@ -9,7 +9,6 @@
       flex-direction: column;
       align-items: center;
       padding-top: 50px;
-
       height: 100vh;
       font-family: sans-serif;
       width: 100%;
@@ -18,7 +17,6 @@
 
     .app {
       width: 100%;
-      /* background-color: #e1e3ea; */
       height: 100vh;
       font-family: sans-serif;
     }
