@@ -4,7 +4,7 @@ The vision for this project is a functional and versatile calendar that is inter
 
 ## What pain point does this project solve?
 
-This project solves daily scheduling, prioritize critical events, and can send reminders for tasks that need to be complete.
+This project solves daily scheduling.
 
 ## Why should we care about your product?
 
