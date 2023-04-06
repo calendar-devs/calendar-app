@@ -5,7 +5,7 @@ body {
 header {
   align-items: center;
   /* border-bottom: 9px rgb(61, 8, 123); */
-  background-color: rgb(62,74,50);
+  background-color: rgb(62, 74, 50);
   display: flex;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   justify-content: space-between;
@@ -19,7 +19,8 @@ a {
   text-decoration: none;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: #f5f5f5;
 }
 
@@ -63,7 +64,7 @@ ol>li {
   color: whitesmoke;
   border-radius: 10px;
   text-decoration: none;
-  
+
 }
 
 aside h2 {
@@ -176,3 +177,58 @@ td {
   font-size: 35px;
   padding: 10px;
 }
+
+.history p {
+  padding: 10px;
+  font-size: 20px;
+  text-indent: 45px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.history img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  max-width: 720px;
+
+}
+/* --------------------ABOUT HTML--------------------- */
+
+.developers {
+padding: 30px;
+
+}
+
+.developers  img {
+ 
+  display: inline;
+  height: 400px;
+  width: 400px;
+  padding: 10px;
+  padding-top: 20px;
+}
+
+.developers h2 {
+  font-size: 30px;
+}
+
+.developers p {
+font-size: 20px;
+}
+
+.brandon-float {
+  display: flex;
+align-items: center;
+text-align: center;
+
+}
+
+.brandon-text {
+  background-color: #a8bbc8;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
