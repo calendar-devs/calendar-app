@@ -16,9 +16,6 @@ This is a tool that can help keep you on time for meetings, boost your productiv
 
 - Our product will display at least one month (April 2023) where a user can click on any day of the month and then add or remove tasks for that day. 
 - There will also be a to-do panel on the side where a user can add or remove tasks they want to get done on no particular day. 
-- There will be a login button where user can login to view their calendar.
-- There will be a button to send an email reminder to the user.
-
 
 ### OUT - What will your product not do.
 These should be features that you will make very clear from the beginning that you will not do during development. These should be limited and very few. Pick your battles wisely. This should only be 1 or 2 things. Example: My website will never turn into an IOS or Android app.

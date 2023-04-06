@@ -36,11 +36,6 @@ function addTask() {
     alert('Please add some task!');
     return false;
   }
-  // check is task already exist
-  // if (document.querySelector(`input[value='${task.value}']`)) {
-  //   alert('Task already exist!');
-  //   return false;
-  // }
 
   // add task to local storage
   localStorage.setItem('tasks', JSON.stringify([...JSON.parse(localStorage.getItem('tasks') || '[]'), { task: task.value, completed: false }]));
@@ -55,7 +50,7 @@ function addTask() {
   task.value = '';
 }
 
-
+// marks the task complete with a line-through
 function taskComplete(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem('tasks')));
   tasks.forEach(task => {
@@ -67,6 +62,7 @@ function taskComplete(event) {
   event.nextElementSibling.classList.toggle('completed');
 }
 
+// deletes task from local storage when the trashcan button is clicked
 function removeTask(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem('tasks')));
   tasks.forEach(task => {
@@ -97,14 +93,6 @@ function editTask(event) {
     return;
   }
 
-  // task already exist
-  // tasks.forEach(task => {
-  //   if (task.task === event.value) {
-  //     alert('Task already exist!');
-  //     event.value = currentTask;
-  //     return;
-  //   }
-  // });
   // update task
   tasks.forEach(task => {
     if (task.task === currentTask) {

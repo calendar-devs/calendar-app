@@ -6,7 +6,6 @@ let months = [];
 const year = 23;
 
 // DOM WINDOW
-let toDoList = document.getElementById('to-do-list');
 let calendar = document.getElementById('calendar-container');
 let selectMonth = document.getElementById('month-dropdown');
 let modal = document.getElementById('modal');
@@ -15,12 +14,14 @@ let selectedDay = null;
 let addEventForm = document.getElementById('add-event-form');
 
 // Month contructor
+// startDay code from https://math.stackexchange.com/questions/3894758/formula-to-find-the-day-of-any-date-in-gregorian-calendar-derivation
+// numberOfWeeks code from https://stackoverflow.com/questions/2483719/get-weeks-in-month-through-javascript
 function Month(nameOfMonth, numberOfDays, keyValue, index) {
   this.nameOfMonth = nameOfMonth;
   this.numberOfDays = numberOfDays;
   this.keyValue = keyValue;
   this.index = index;
-  this.startDay = (1 + this.keyValue + 5 + year + Math.floor(year / 4)) % 7;
+  this.startDay = (1 + this.keyValue + 5 + year + Math.floor(year / 4)) % 7; //returns a number, 0 = Sunday, 1 = Monday, etc. 
   this.numberOfWeeks = getNumWeeks(this.index, this.startDay);
 
   months.push(this);
@@ -79,30 +80,35 @@ Month.prototype.render = function () {
   calendar.appendChild(monthDiv);
 };
 
+// Day constructor
 function Day(eventsOfDay) {
   this.eventsOfDay = eventsOfDay;
 }
 
+// Day method to add events
 Day.prototype.addEvent = function (time, title) {
   let newEvent = new DayEvent(time, title);
   this.eventsOfDay.push(newEvent);
 };
 
+// Day method to remove events
 Day.prototype.removeEvent = function (eventIndex, date) {
   this.eventsOfDay.splice(eventIndex, 1);
   this.saveToLocalStorage(date);
 };
 
+// Day method to store events to Local
 Day.prototype.saveToLocalStorage = function (date) {
   localStorage.setItem(date, JSON.stringify(this.eventsOfDay));
 };
 
+//DayEvent constructor
 function DayEvent(time, title) {
   this.time = time;
   this.title = title;
 }
 
-// Displays the day of the month on the events of that day
+// Displays the days of the month and the events of each day
 function displayCounter(month, counter, numberOfDays, td) {
   if (counter > numberOfDays) {
     td.textContent = ' ';
@@ -131,9 +137,7 @@ function getNumWeeks(month, firstDay) {
 // Makes modal appear when you click on a day in the calendar
 function handleDateClick(e) {
   modal.style.display = 'block';
-  // selectedDay = e.target;
   selectedDay = this; // grabs the td that the user clicked on
-  console.log(selectedDay);
   displayEventsToModal(selectedDay);
   addEventForm.reset(); // clears the form for next event
 }
@@ -246,8 +250,3 @@ selectMonth.addEventListener('submit', handleMonthSubmit);
 // FUNCTION CALLS
 generateMonths();
 monthDropDown();
-
-// for (let i = 0; i < months.length; i++) {
-//   months[i].render();
-// }
-
